@@ -1,12 +1,11 @@
 import streamlit as st
 import pandas as pd
-import datetime
 
 st.set_page_config(layout="wide")
 
 # İstifadəçi məlumatları
 USER_DATA = {
-    "Natiq.Rasulzada": "gunluk123", 
+    "Natiq.Rasulzada": "gunluk123",
     "Gulchin.Nuralizada.ADY": "gunluk2501",
     "Lalezar.Hanifayeva": "gunluk0303",
     "Lala.Rzayeva.ADY": "gunlukhesabat123",
@@ -31,7 +30,6 @@ if not st.session_state.authenticated:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            st.experimental_rerun()  # Uğurlu girişdən sonra səhifəni yeniləyir
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
