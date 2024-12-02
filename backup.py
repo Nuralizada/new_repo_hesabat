@@ -58,10 +58,10 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
             
     st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
             
-            # Tarix sütunlarını datetime formatına çevirmək
-            fakt_df['Tarix'] = pd.to_datetime(fakt_df['Tarix'], errors='coerce')
-            plan_df['Tarix'] = pd.to_datetime(plan_df['Tarix'], errors='coerce')
-            plan_f['Tarix'] = pd.to_datetime(plan_f['Tarix'], errors='coerce')
+    # Tarix sütunlarını datetime formatına çevirmək
+    fakt_df['Tarix'] = pd.to_datetime(fakt_df['Tarix'], errors='coerce')
+    plan_df['Tarix'] = pd.to_datetime(plan_df['Tarix'], errors='coerce')
+    plan_f['Tarix'] = pd.to_datetime(plan_f['Tarix'], errors='coerce')
             
             # Minimum başlanğıc tarixi (yanvarın 1-dən etibarən)
             minimum_baslangic_tarix = datetime.date(datetime.datetime.now().year, 1, 1)
