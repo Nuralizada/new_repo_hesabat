@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 import datetime
+import calendar
 
+# Səhifə konfiqurasiyasını təyin edin
 st.set_page_config(layout="wide")
-# İstifadəçi məlumatlarını saxlayan bir dict (fayl yerinə)
+
+# İstifadəçi məlumatlarını saxlayan bir dict
 USER_DATA = {
     "Natiq.Rasulzada": "gunluk123",  # İstifadəçi ID: parol
     "Gulchin.Nuralizada.ADY": "gunluk2501",
@@ -12,12 +15,14 @@ USER_DATA = {
     "Adil.Movsumov": "Pilotboeing737"
 }
 
-# Session State-də identifikasiya vəziyyətini və istifadəçi ID-ni yoxlamaq
+# Session State-də identifikasiya vəziyyətini və səhifə vəziyyətini yoxlamaq
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
-    st.session_state.user_id = None
+if "page" not in st.session_state:
+    st.session_state.page = "login"  # Başlanğıcda giriş səhifəsi
 
-if not st.session_state.authenticated:
+# Giriş səhifəsi
+def giris_sehifesi():
     st.title("Tətbiqə Giriş")
 
     # İstifadəçidən ID və parol tələb olunur
@@ -28,19 +33,18 @@ if not st.session_state.authenticated:
         # İstifadəçi ID və parol yoxlanılır
         if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
-            st.session_state.user_id = user_id
+            st.session_state.page = "reports"  # Hesabatlar səhifəsinə keçid
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
-if st.session_state.authenticated:
-
-# Səhifəni seçin
-            page = st.sidebar.radio(
-                "Səhifəni seçin",
-                ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
-            )
-            
+# Hesabat səhifəsi
+def hesabat_sehifesi():
+    # Səhifəni seçin
+    page = st.sidebar.radio(
+        "Səhifəni seçin",
+        ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
+    )
             
             import streamlit as st
             import pandas as pd
