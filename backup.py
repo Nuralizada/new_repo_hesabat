@@ -21,8 +21,8 @@ if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
     # İstifadəçidən ID və parol tələb olunur
-    user_id = st.text_input("ID:")
-    password = st.text_input("Password:", type="password")
+    user_id = st.text_input("ID:", key="user_id_input")
+    password = st.text_input("Password:", type="password", key="password_input")
 
     if st.button("Giriş"):
         # İstifadəçi ID və parol yoxlanılır
@@ -32,10 +32,7 @@ if not st.session_state.authenticated:
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-
-# Hesabat səhifəsi
-if st.session_state.authenticated:
-
+else:
             
             import streamlit as st
             import pandas as pd
