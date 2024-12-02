@@ -46,9 +46,7 @@ def hesabat_sehifesi():
         ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
     )
             
-            
-            
-            # Məlumatların yüklənməsi
+# Məlumatların yüklənməsi
             fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
             fakt_df = pd.read_csv(fact_url)
             plan_df = pd.read_excel("plan fakt.xlsx")
@@ -1209,3 +1207,6 @@ def hesabat_sehifesi():
                         {'selector': 'thead th', 'props': [('background-color', '#2b2563'), ('color', 'white')]},
                         {'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]},
                     ]))
+            
+            
+            
