@@ -46,9 +46,9 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
     st.session_state.pop("user_id_input", None)
     st.session_state.pop("password_input", None)
     import streamlit as st
-            import pandas as pd
-            import datetime
-            import calendar
+    import pandas as pd
+    import datetime
+    import calendar
             
             # Məlumatların yüklənməsi
             fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
