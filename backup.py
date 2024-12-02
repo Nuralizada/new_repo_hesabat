@@ -45,8 +45,7 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
     # Giriş formunun qalıq məlumatlarının aradan qaldırılması
     st.session_state.pop("user_id_input", None)
     st.session_state.pop("password_input", None)
-            
-            import streamlit as st
+    import streamlit as st
             import pandas as pd
             import datetime
             import calendar
@@ -1217,3 +1216,5 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
                         {'selector': 'thead th', 'props': [('background-color', '#2b2563'), ('color', 'white')]},
                         {'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]},
                     ]))
+        
+            
