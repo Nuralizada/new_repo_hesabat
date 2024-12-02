@@ -46,10 +46,7 @@ def hesabat_sehifesi():
         ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
     )
             
-            import streamlit as st
-            import pandas as pd
-            import datetime
-            import calendar
+            
             
             # Məlumatların yüklənməsi
             fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
