@@ -49,14 +49,14 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
     import pandas as pd
     import datetime
     import calendar
+    # Məlumatların yüklənməsi
+    fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
+    fakt_df = pd.read_csv(fact_url)
+    plan_df = pd.read_excel("plan fakt.xlsx")
+    plan_f = pd.read_excel("Ekspeditor Fraxt.xlsx")
+                    
             
-            # Məlumatların yüklənməsi
-            fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
-            fakt_df = pd.read_csv(fact_url)
-            plan_df = pd.read_excel("plan fakt.xlsx")
-            plan_f = pd.read_excel("Ekspeditor Fraxt.xlsx")
-            
-            st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
+    st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
             
             # Tarix sütunlarını datetime formatına çevirmək
             fakt_df['Tarix'] = pd.to_datetime(fakt_df['Tarix'], errors='coerce')
