@@ -16,15 +16,20 @@ USER_DATA = {
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
+if "login_attempted" not in st.session_state:
+    st.session_state.login_attempted = False
+
 # Giriş səhifəsi
 if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
     # İstifadəçidən ID və parol tələb olunur
-    user_id = st.text_input("ID:", key="user_id_input")
-    password = st.text_input("Password:", type="password", key="password_input")
+    user_id = st.text_input("ID:", key="user_id_input", disabled=st.session_state.login_attempted)
+    password = st.text_input("Password:", type="password", key="password_input", disabled=st.session_state.login_attempted)
 
-    if st.button("Giriş"):
+    if st.button("Giriş", disabled=st.session_state.login_attempted):
+        st.session_state.login_attempted = True  # Giriş klikindən sonra form deaktiv edilir
+
         # İstifadəçi ID və parol yoxlanılır
         if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
@@ -32,7 +37,10 @@ if not st.session_state.authenticated:
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-else:
+            st.session_state.login_attempted = False  # Uğursuz girişdən sonra formu yenidən aktiv edin
+
+# Hesabat səhifəsi
+if st.session_state.authenticated:
             
             import streamlit as st
             import pandas as pd
