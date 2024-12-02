@@ -1,12 +1,9 @@
 import streamlit as st
 import pandas as pd
 import datetime
-import calendar
 
-# Səhifə konfiqurasiyasını təyin edin
 st.set_page_config(layout="wide")
-
-# İstifadəçi məlumatlarını saxlayan bir dict
+# İstifadəçi məlumatlarını saxlayan bir dict (fayl yerinə)
 USER_DATA = {
     "Natiq.Rasulzada": "gunluk123",  # İstifadəçi ID: parol
     "Gulchin.Nuralizada.ADY": "gunluk2501",
@@ -15,14 +12,12 @@ USER_DATA = {
     "Adil.Movsumov": "Pilotboeing737"
 }
 
-# Session State-də identifikasiya vəziyyətini və səhifə vəziyyətini yoxlamaq
+# Session State-də identifikasiya vəziyyətini və istifadəçi ID-ni yoxlamaq
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
-if "page" not in st.session_state:
-    st.session_state.page = "login"  # Başlanğıcda giriş səhifəsi
+    st.session_state.user_id = None
 
-# Giriş səhifəsi
-def giris_sehifesi():
+if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
     # İstifadəçidən ID və parol tələb olunur
@@ -33,20 +28,20 @@ def giris_sehifesi():
         # İstifadəçi ID və parol yoxlanılır
         if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
-            st.session_state.page = "reports"  # Hesabatlar səhifəsinə keçid
+            st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
-# Hesabat səhifəsi
-def hesabat_sehifesi():
-    # Səhifəni seçin
-    page = st.sidebar.radio(
-        "Səhifəni seçin",
-        ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
-    )
+if st.session_state.authenticated:
+
             
-# Məlumatların yüklənməsi
+            import streamlit as st
+            import pandas as pd
+            import datetime
+            import calendar
+            
+            # Məlumatların yüklənməsi
             fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
             fakt_df = pd.read_csv(fact_url)
             plan_df = pd.read_excel("plan fakt.xlsx")
@@ -212,6 +207,11 @@ def hesabat_sehifesi():
                     'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]
                 }]))  # Cədvəlin fonu mavi
             
+            # Səhifəni seçin
+            page = st.sidebar.radio(
+                "Səhifəni seçin",
+                ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
+            )
             
             # Card tərzi üçün tərz
             def card(title, value):
@@ -1207,6 +1207,3 @@ def hesabat_sehifesi():
                         {'selector': 'thead th', 'props': [('background-color', '#2b2563'), ('color', 'white')]},
                         {'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]},
                     ]))
-            
-            
-            
