@@ -33,7 +33,8 @@ if not st.session_state.authenticated:
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
-if st.session_state.authenticated:
+if st.session_state.page == "reports" and st.session_state.authenticated:
+
 
             
             import streamlit as st
