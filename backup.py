@@ -45,23 +45,23 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
     # Giriş formunun qalıq məlumatlarının aradan qaldırılması
     st.session_state.pop("user_id_input", None)
     st.session_state.pop("password_input", None)
-    import streamlit as st
-    import pandas as pd
-    import datetime
-    import calendar
-    # Məlumatların yüklənməsi
-    fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
-    fakt_df = pd.read_csv(fact_url)
-    plan_df = pd.read_excel("plan fakt.xlsx")
-    plan_f = pd.read_excel("Ekspeditor Fraxt.xlsx")
-                    
+            import streamlit as st
+            import pandas as pd
+            import datetime
+            import calendar
             
-    st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
+            # Məlumatların yüklənməsi
+            fact_url = 'https://drive.google.com/uc?id=1lfRDeRq36e-wBn6undzT1DxlDiKst_8M&export=download'
+            fakt_df = pd.read_csv(fact_url)
+            plan_df = pd.read_excel("plan fakt.xlsx")
+            plan_f = pd.read_excel("Ekspeditor Fraxt.xlsx")
             
-    # Tarix sütunlarını datetime formatına çevirmək
-    fakt_df['Tarix'] = pd.to_datetime(fakt_df['Tarix'], errors='coerce')
-    plan_df['Tarix'] = pd.to_datetime(plan_df['Tarix'], errors='coerce')
-    plan_f['Tarix'] = pd.to_datetime(plan_f['Tarix'], errors='coerce')
+            st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
+            
+            # Tarix sütunlarını datetime formatına çevirmək
+            fakt_df['Tarix'] = pd.to_datetime(fakt_df['Tarix'], errors='coerce')
+            plan_df['Tarix'] = pd.to_datetime(plan_df['Tarix'], errors='coerce')
+            plan_f['Tarix'] = pd.to_datetime(plan_f['Tarix'], errors='coerce')
             
             # Minimum başlanğıc tarixi (yanvarın 1-dən etibarən)
             minimum_baslangic_tarix = datetime.date(datetime.datetime.now().year, 1, 1)
@@ -1216,5 +1216,3 @@ if st.session_state.authenticated or st.experimental_get_query_params().get("aut
                         {'selector': 'thead th', 'props': [('background-color', '#2b2563'), ('color', 'white')]},
                         {'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]},
                     ]))
-        
-            
