@@ -3,20 +3,21 @@ import pandas as pd
 import datetime
 
 st.set_page_config(layout="wide")
-# İstifadəçi məlumatlarını saxlayan bir dict (fayl yerinə)
+
+# İstifadəçi məlumatları
 USER_DATA = {
-    "Natiq.Rasulzada": "gunluk123",  # İstifadəçi ID: parol
+    "Natiq.Rasulzada": "gunluk123", 
     "Gulchin.Nuralizada.ADY": "gunluk2501",
     "Lalezar.Hanifayeva": "gunluk0303",
     "Lala.Rzayeva.ADY": "gunlukhesabat123",
     "Adil.Movsumov": "Pilotboeing737"
 }
 
-# Session State-də identifikasiya vəziyyətini və istifadəçi ID-ni yoxlamaq
+# Session State-də identifikasiya vəziyyətini saxlamaq
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
-    st.session_state.user_id = None
 
+# Giriş səhifəsi
 if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
@@ -30,9 +31,11 @@ if not st.session_state.authenticated:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
+            st.experimental_rerun()  # Uğurlu girişdən sonra səhifəni yeniləyir
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
+# Hesabat səhifəsi
 if st.session_state.authenticated:
 
             
