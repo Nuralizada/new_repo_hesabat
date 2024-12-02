@@ -35,7 +35,12 @@ if not st.session_state.authenticated:
 
 if st.session_state.authenticated:
 
-
+# Səhifəni seçin
+            page = st.sidebar.radio(
+                "Səhifəni seçin",
+                ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
+            )
+            
             
             import streamlit as st
             import pandas as pd
@@ -208,11 +213,6 @@ if st.session_state.authenticated:
                     'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]
                 }]))  # Cədvəlin fonu mavi
             
-            # Səhifəni seçin
-            page = st.sidebar.radio(
-                "Səhifəni seçin",
-                ("Report", "Rejimlər üzrə hesabat", "Digər yüklər", "Tranzit")
-            )
             
             # Card tərzi üçün tərz
             def card(title, value):
