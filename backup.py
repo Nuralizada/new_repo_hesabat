@@ -1,5 +1,8 @@
 import streamlit as st
+import pandas as pd
+import datetime
 
+st.set_page_config(layout="wide")
 # İstifadəçi məlumatlarını saxlayan bir dict (fayl yerinə)
 USER_DATA = {
     "Natiq.Rasulzada": "gunluk123",  # İstifadəçi ID: parol
@@ -16,11 +19,11 @@ if "authenticated" not in st.session_state:
 
 if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
-    
+
     # İstifadəçidən ID və parol tələb olunur
     user_id = st.text_input("ID:")
     password = st.text_input("Password:", type="password")
-    
+
     if st.button("Giriş"):
         # İstifadəçi ID və parol yoxlanılır
         if user_id in USER_DATA and USER_DATA[user_id] == password:
@@ -29,7 +32,9 @@ if not st.session_state.authenticated:
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-else: 
+
+if st.session_state.authenticated:
+
             
             import streamlit as st
             import pandas as pd
@@ -41,7 +46,7 @@ else:
             fakt_df = pd.read_csv(fact_url)
             plan_df = pd.read_excel("plan fakt.xlsx")
             plan_f = pd.read_excel("Ekspeditor Fraxt.xlsx")
-            st.set_page_config(layout="wide")
+            
             st.markdown('<style>div.block-container{padding-top:3rem;}</style>', unsafe_allow_html=True)
             
             # Tarix sütunlarını datetime formatına çevirmək
@@ -1202,4 +1207,3 @@ else:
                         {'selector': 'thead th', 'props': [('background-color', '#2b2563'), ('color', 'white')]},
                         {'selector': 'tbody td', 'props': [('text-align', 'center'), ('background-color', '#f0f0f5')]},
                     ]))
-       
