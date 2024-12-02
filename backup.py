@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 import datetime
+import calendar
 
+# Səhifə konfiqurasiyasını təyin edin
 st.set_page_config(layout="wide")
-# İstifadəçi məlumatlarını saxlayan bir dict (fayl yerinə)
+
+# İstifadəçi məlumatlarını saxlayan bir dict
 USER_DATA = {
     "Natiq.Rasulzada": "gunluk123",  # İstifadəçi ID: parol
     "Gulchin.Nuralizada.ADY": "gunluk2501",
@@ -17,6 +20,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
     st.session_state.user_id = None
 
+# Giriş səhifəsi
 if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
@@ -32,8 +36,7 @@ if not st.session_state.authenticated:
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-
-if st.session_state.authenticated:
+else:
 
             
             import streamlit as st
