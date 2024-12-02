@@ -17,7 +17,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
     st.session_state.user_id = None
 
-elif not st.session_state.authenticated:
+if not st.session_state.authenticated:
     st.title("Tətbiqə Giriş")
 
     # İstifadəçidən ID və parol tələb olunur
