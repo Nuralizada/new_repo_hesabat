@@ -39,6 +39,12 @@ if not st.session_state.authenticated:
 # Hesabat səhifəsi
 if st.session_state.authenticated or st.experimental_get_query_params().get("auth") == ["true"]:
     st.session_state.authenticated = True  # Query param-dan gələndə də təsdiqlə
+  
+   
+
+    # Giriş formunun qalıq məlumatlarının aradan qaldırılması
+    st.session_state.pop("user_id_input", None)
+    st.session_state.pop("password_input", None)
             
             import streamlit as st
             import pandas as pd
