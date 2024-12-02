@@ -30,12 +30,15 @@ if not st.session_state.authenticated:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            st.experimental_rerun()  # Girişdən sonra səhifəni yenidən yükləyir
+            
+            # Sorğu parametrlərini dəyişərək səhifəni yenidən yükləyin
+            st.experimental_set_query_params(auth="true")
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
 # Hesabat səhifəsi
-if st.session_state.authenticated:
+if st.session_state.authenticated or st.experimental_get_query_params().get("auth") == ["true"]:
+    st.session_state.authenticated = True  # Query param-dan gələndə də təsdiqlə
             
             import streamlit as st
             import pandas as pd
