@@ -1207,7 +1207,6 @@ def login_page():
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            st.experimental_rerun()  # Girişdən sonra səhifəni yenidən yükləyir
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
