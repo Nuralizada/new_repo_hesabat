@@ -19,10 +19,10 @@ USER_DATA = {
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
     st.session_state.user_id = None
-    st.session_state.page_visited = False
 
 # Əsas səhifənin məzmunu
 def main_page():
+    st.title("Hesabat Səhifəsi")
     
 
         import streamlit as st
@@ -1207,13 +1207,16 @@ def login_page():
         if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
-            st.session_state.page_visited = True  # Giriş səhifəsini bir dəfə göstərmək üçün
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
+            st.experimental_set_query_params(page="main")  # Parametr dəyişdirilir
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
 # Səhifə keçidini idarə edin
-if not st.session_state.page_visited:
-    login_page()
-elif st.session_state.authenticated:
+query_params = st.experimental_get_query_params()
+current_page = query_params.get("page", ["login"])[0]
+
+if current_page == "main" and st.session_state.authenticated:
     main_page()
+else:
+    login_page()
