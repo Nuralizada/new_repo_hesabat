@@ -1208,12 +1208,15 @@ def login_page():
             st.session_state.user_id = user_id
             st.session_state.page_visited = True  # Giriş səhifəsini bir dəfə göstərmək üçün
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            main_page()
+           
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-
-# Səhifə keçidini idarə edin
     if not st.session_state.page_visited:
         login_page()
     elif st.session_state.authenticated:
         main_page()
+# Səhifə keçidini idarə edin
+if not st.session_state.page_visited:
+    login_page()
+elif st.session_state.authenticated:
+    main_page()
