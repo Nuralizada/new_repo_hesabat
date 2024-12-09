@@ -46,9 +46,12 @@ if "authenticated" not in st.session_state:
 # Əsas səhifənin məzmunu
 def main_page():
 
-        if not is_session_valid():
-            st.session_state.clear()
-            st.rerun()
+        # Check if the user is authenticated
+        if "authenticated" in st.session_state and st.session_state["authenticated"]:
+            st.title(f"Welcome, {st.session_state.get('user_id', 'User')}!")
+        else:
+            st.warning("Session expired or not authenticated. Please login again.")
+            login_page()
     
         import streamlit as st
         import pandas as pd
