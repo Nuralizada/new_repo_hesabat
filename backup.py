@@ -26,8 +26,6 @@ if "login_page_shown" not in st.session_state:
     st.session_state.login_page_shown = False
 
 # Cache dekoratorundan istifadə edin
-@st.cache_resource
-
 
 
 
