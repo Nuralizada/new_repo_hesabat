@@ -15,6 +15,28 @@ USER_DATA = {
     "Adil.Movsumov": "Pilotboeing737"
 }
 
+
+# Helper function to hash sensitive information
+def hash_data(data):
+    return hashlib.sha256(data.encode()).hexdigest()
+
+# Session expiration time in seconds
+SESSION_DURATION = 3600  # 1 hour
+# Function to validate session
+def is_session_valid():
+    if "authenticated" not in st.session_state:
+        return False
+    if "session_start" not in st.session_state:
+        return False
+    # Check if session expired
+    if time.time() - st.session_state["session_start"] > SESSION_DURATION:
+        st.warning("Session expired. Please login again.")
+        return False
+    return True
+
+
+
+
 # Session State-də identifikasiya vəziyyətini yoxlayın
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -24,7 +46,10 @@ if "authenticated" not in st.session_state:
 # Əsas səhifənin məzmunu
 def main_page():
 
-
+        if not is_session_valid():
+            st.session_state.clear()
+            st.experimental_rerun()
+    
         import streamlit as st
         import pandas as pd
         import datetime
@@ -1208,13 +1233,12 @@ def login_page():
             st.session_state.user_id = user_id
             st.session_state.page_visited = True  # Giriş səhifəsini bir dəfə göstərmək üçün
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            return True
+            st.experimental_rerun()
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
-# Səhifə keçidini idarə edin
-if not st.session_state.page_visited:
-    if login_page():
-        main_page()
-elif st.session_state.authenticated:
+# App Navigation
+if "authenticated" not in st.session_state or not st.session_state.get("authenticated", False):
+    login_page()
+else:
     main_page()
