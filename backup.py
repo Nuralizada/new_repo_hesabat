@@ -1211,10 +1211,7 @@ def login_page():
            
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
-    if not st.session_state.page_visited:
-        login_page()
-    elif st.session_state.authenticated:
-        main_page()
+    
 # Səhifə keçidini idarə edin
 if not st.session_state.page_visited:
     login_page()
