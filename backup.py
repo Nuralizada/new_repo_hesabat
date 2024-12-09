@@ -48,7 +48,7 @@ def main_page():
 
         if not is_session_valid():
             st.session_state.clear()
-            st.experimental_rerun()
+            st.rerun()
     
         import streamlit as st
         import pandas as pd
@@ -1233,7 +1233,7 @@ def login_page():
             st.session_state.user_id = user_id
             st.session_state.page_visited = True  # Giriş səhifəsini bir dəfə göstərmək üçün
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
