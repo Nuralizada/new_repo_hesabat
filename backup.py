@@ -1215,7 +1215,6 @@ def login_page():
 
     if st.button("Giriş"):
         if user_id in USER_DATA and USER_DATA[user_id] == password:
-            if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
