@@ -21,6 +21,17 @@ if "authenticated" not in st.session_state:
     st.session_state.user_id = None
     st.session_state.page_visited = False
 
+# Login səhifəsini bir dəfə göstərmək üçün flag
+if "login_page_shown" not in st.session_state:
+    st.session_state.login_page_shown = False
+
+# Cache dekoratorundan istifadə edin
+@st.cache_resource
+
+
+
+
+
 # Əsas səhifənin məzmunu
 def main_page():
 
@@ -1204,16 +1215,18 @@ def login_page():
 
     if st.button("Giriş"):
         if user_id in USER_DATA and USER_DATA[user_id] == password:
+            if user_id in USER_DATA and USER_DATA[user_id] == password:
             st.session_state.authenticated = True
             st.session_state.user_id = user_id
-            st.session_state.page_visited = True  # Giriş səhifəsini bir dəfə göstərmək üçün
             st.success(f"Giriş uğurlu oldu! Xoş gəldiniz, {user_id}.")
-            main_page()
         else:
             st.error("Yanlış istifadəçi ID və ya parol.")
 
+
 # Səhifə keçidini idarə edin
-if not st.session_state.page_visited:
-    login_page()
-elif st.session_state.authenticated:
+if not st.session_state.authenticated:
+    if not st.session_state.login_page_shown:
+        login_page()
+        st.session_state.login_page_shown = True
+else:
     main_page()
