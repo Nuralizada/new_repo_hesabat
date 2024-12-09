@@ -1213,7 +1213,7 @@ def login_page():
             st.error("Yanlış istifadəçi ID və ya parol.")
 
 # Səhifə keçidini idarə edin
-if not st.session_state.page_visited:
-    login_page()
-elif st.session_state.authenticated:
-    main_page()
+    if not st.session_state.page_visited:
+        login_page()
+    elif st.session_state.authenticated:
+        main_page()
