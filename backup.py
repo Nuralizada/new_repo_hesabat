@@ -551,24 +551,29 @@ if st.session_state.authenticated:
                     </h3>
                 """, unsafe_allow_html=True)
             
+                                # Seçilmiş ilə uyğun olaraq tarix aralığı məhdudiyyətləri
+                minimum_baslangic_tarix = pd.Timestamp("2020-01-01")  # Ən erkən tarix (2020-ci ildən etibarən)
+                maksimum_bitis_tarix = datetime.date.today()  # Bugünkü tarix
+                
                 # Girişlər üçün üç sütun istifadə edin
                 col1, col2, col3 = st.columns(3)
-            
+                
                 with col1:
                     baslangic_tarix = st.date_input(
-                        "Başlanğıc tarixi", 
-                        value=None,
-                        min_value=minimum_baslangic_tarix,
-                        max_value=fakt_df['Tarix'].max().date()
+                        "Başlanğıc tarixi",
+                        value=minimum_baslangic_tarix.date(),
+                        min_value=minimum_baslangic_tarix.date(),
+                        max_value=maksimum_bitis_tarix
                     )
-            
+                
                 with col2:
                     bitis_tarix = st.date_input(
-                        "Bitiş tarixi", 
-                        value=None,  
-                        min_value=minimum_baslangic_tarix,
-                        max_value=datetime.date.today() - datetime.timedelta(days=1)
+                        "Bitiş tarixi",
+                        value=maksimum_bitis_tarix,
+                        min_value=minimum_baslangic_tarix.date(),
+                        max_value=maksimum_bitis_tarix
                     )
+
             
                 with col3:
                     rejim_secimi = st.selectbox(
