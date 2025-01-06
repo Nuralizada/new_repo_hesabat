@@ -818,17 +818,31 @@ if st.session_state.authenticated:
                 with col2:
                     st.markdown("<center><h3 style='color: #16105c;'>Ekspeditorlar üzrə aylıq və illik daşınma məlumatları</h3></center>", unsafe_allow_html=True)
             
+                                # Minimum və maksimum tarixlər
+                minimum_baslangic_tarix = pd.Timestamp("2024-01-01")  # İstəyə uyğun dəyişə bilərsiniz
+                maksimum_bitis_tarix = datetime.date.today() - datetime.timedelta(days=1)
+                
                 # Tarix seçimi üçün üç sütun yaradın
                 col_start_date, col_end_date, col_rejim = st.columns([1, 1, 1])  # Eyni sətrdə tarixi seçirik
                 
                 with col_start_date:
                     # Başlanğıc tarixi seçimi
-                    start_date = st.date_input("Başlanğıc tarixi", value=datetime.date(datetime.datetime.now().year, 1, 1), min_value=minimum_baslangic_tarix, max_value=datetime.date.today() - datetime.timedelta(days=1))
+                    start_date = st.date_input(
+                        "Başlanğıc tarixi", 
+                        value=minimum_baslangic_tarix.date(),  # Varsayılan başlanğıc tarix (ən erkən tarix)
+                        min_value=minimum_baslangic_tarix.date(),
+                        max_value=maksimum_bitis_tarix
+                    )
                 
                 with col_end_date:
                     # Bitiş tarixi seçimi
-                    end_date = st.date_input("Bitiş tarixi", value=datetime.date.today() - datetime.timedelta(days=1), min_value=minimum_baslangic_tarix, max_value=datetime.date.today() - datetime.timedelta(days=1))
-            
+                    end_date = st.date_input(
+                        "Bitiş tarixi", 
+                        value=maksimum_bitis_tarix,  # Varsayılan bitiş tarix (bugünkü tarixdən əvvəlki gün)
+                        min_value=minimum_baslangic_tarix.date(),
+                        max_value=maksimum_bitis_tarix
+                    )
+
                 with col_rejim:
                     # Rejim seçimi üçün multiselect əlavə edirik
                     rejim_options = ["Bütün rejimlər"] + fakt_df['Rejim'].unique().tolist()
