@@ -232,7 +232,7 @@ if st.session_state.authenticated:
                 """, unsafe_allow_html=True)
             
                 # Tarix aralığı üçün minimum və maksimum tarixləri müəyyən edin
-                minimum_baslangic_tarix = pd.Timestamp("2025-01-01")  # Ən erkən tarix (istəyə uyğun dəyişdirilə bilər)
+                minimum_baslangic_tarix = pd.Timestamp("2024-01-01")  # Ən erkən tarix (istəyə uyğun dəyişdirilə bilər)
                 maksimum_bitis_tarix = fakt_df['Tarix'].max().date() if not fakt_df.empty else datetime.date.today()
                 
                 # Girişlər üçün üç sütun istifadə edin
